@@ -4,7 +4,6 @@ import allrightsy.Artifact;
 import allrightsy.ArtifactType;
 import allrightsy.License;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.cobbzilla.util.http.HttpSchemes;
 import org.cobbzilla.util.io.FileUtil;
 import org.cobbzilla.util.io.FilesystemWalker;
 import org.cobbzilla.util.main.BaseMain;
@@ -14,15 +13,17 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.cobbzilla.util.daemon.ZillaRuntime.empty;
 import static org.cobbzilla.util.daemon.ZillaRuntime.shortError;
-import static org.cobbzilla.util.http.HttpSchemes.*;
-import static org.cobbzilla.util.http.HttpUtil.url2string;
-import static org.cobbzilla.util.io.FileUtil.*;
-import static org.cobbzilla.util.json.JsonUtil.*;
+import static org.cobbzilla.util.http.HttpSchemes.SCHEME_HTTP;
+import static org.cobbzilla.util.http.HttpSchemes.SCHEME_HTTPS;
+import static org.cobbzilla.util.io.FileUtil.abs;
+import static org.cobbzilla.util.json.JsonUtil.fromJsonOrDie;
+import static org.cobbzilla.util.json.JsonUtil.json;
 import static org.cobbzilla.util.system.CommandShell.execScript;
 
 public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
