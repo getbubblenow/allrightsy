@@ -18,6 +18,12 @@ public class AllRightsyOptions extends BaseMainOptions {
     @Option(name=OPT_PACKS, aliases=LONGOPT_PACKS, usage=USAGE_PACKS, required=true)
     @Getter @Setter private String packs;
 
+    public static final String USAGE_OUTFILE = "Output file, should end in .json";
+    public static final String OPT_OUTFILE = "-o";
+    public static final String LONGOPT_OUTFILE = "--outfile";
+    @Option(name=OPT_OUTFILE, aliases=LONGOPT_OUTFILE, usage=USAGE_OUTFILE, required=true)
+    @Getter @Setter private File outFile;
+
     public List<File> getPackageFiles() {
         return Arrays.stream(packs.split(",")).map(File::new).collect(Collectors.toList());
     }

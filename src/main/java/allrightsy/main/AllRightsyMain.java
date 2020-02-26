@@ -32,6 +32,13 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
 
     @Override protected void run() throws Exception {
         final AllRightsyOptions opts = getOptions();
+
+        final File outFile = opts.getOutFile();
+        if (!abs(outFile).endsWith(".json")) {
+            die("outfile does not end with .json");
+            return;
+        }
+
         final List<Artifact> artifacts = new ArrayList<>();
         for (File f : opts.getPackageFiles()) {
             if (f.getName().equals("pom.xml")) {
@@ -65,7 +72,7 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
             }
         }
 
-        out(json(artifacts));
+        FileUtil.toFile(outFile, json(artifacts));
     }
 
     private List<Artifact> processPom(File pom) {
