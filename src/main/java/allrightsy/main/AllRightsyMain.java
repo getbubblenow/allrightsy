@@ -172,7 +172,7 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
         artifacts.add(new Artifact()
                 .setName(name)
                 .setType(ArtifactType.npm)
-                .addLicense(new License().setName(name).setText(licenseContent)));
+                .addLicense(new License().setName(spdxLicense).setText(licenseContent)));
         return artifacts;
     }
 

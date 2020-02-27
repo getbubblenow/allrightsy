@@ -1,5 +1,6 @@
 package allrightsy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,8 +17,7 @@ public class Artifact {
     @Getter @Setter private ArtifactType type;
     @Getter @Setter private License[] licenses;
 
-    @Getter(lazy=true) private final String id = hashOf(getName(), getType(), getLicenses());
-    public void setId () {} // noop
+    @JsonIgnore @Getter(lazy=true) private final String id = hashOf(getName(), getType(), getLicenses());
 
     public Artifact addLicense(License license) {
         licenses = ArrayUtil.append(licenses, license);
