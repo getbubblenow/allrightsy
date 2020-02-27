@@ -1,11 +1,11 @@
 package allrightsy;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.cobbzilla.util.collection.ArrayUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor @Accessors(chain=true) @ToString(of={"name", "type"})
 public class Artifact {
