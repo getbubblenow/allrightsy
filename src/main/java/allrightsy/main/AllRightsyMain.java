@@ -130,7 +130,7 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
                     }
                 }
                 artifacts.add(new Artifact()
-                        .setType(ArtifactType.pom)
+                        .setType(ArtifactType.maven)
                         .setName(groupId+"."+artifactId)
                         .addLicense(new License()
                                 .setName(name)
