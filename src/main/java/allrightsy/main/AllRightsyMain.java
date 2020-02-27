@@ -132,7 +132,10 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
                 artifacts.add(new Artifact()
                         .setType(ArtifactType.pom)
                         .setName(groupId+"."+artifactId)
-                        .addLicense(new License().setName(name).setText(licenseContent)));
+                        .addLicense(new License()
+                                .setName(name)
+                                .setUrl(url)
+                                .setText(licenseContent)));
             }
         }
         return artifacts;
@@ -155,7 +158,7 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
         final JsonNode node = fromJsonOrDie(f, JsonNode.class);
         String spdxLicense = jsonText(node, "license");
         String licenseText = jsonText(node, "licenseText");
-
+        String url = null;
         String licenseContent = fileLicense(f.getParentFile());
         if (licenseContent == null) {
             if (!empty(licenseText)) {
@@ -166,13 +169,17 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
                     err("processPackageJson(" + abs(f) + "): spdxLicense text could not be loaded");
                     return artifacts;
                 }
+                url = spdxLicenseUrl(normalizeSpdxLicense(spdxLicense));
             }
         }
 
         artifacts.add(new Artifact()
                 .setName(name)
                 .setType(ArtifactType.npm)
-                .addLicense(new License().setName(spdxLicense).setText(licenseContent)));
+                .addLicense(new License()
+                        .setName(spdxLicense)
+                        .setUrl(url)
+                        .setText(licenseContent)));
         return artifacts;
     }
 
