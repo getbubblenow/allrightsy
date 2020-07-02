@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Comparator.comparing;
 import static org.cobbzilla.util.daemon.ZillaRuntime.empty;
 import static org.cobbzilla.util.daemon.ZillaRuntime.shortError;
 import static org.cobbzilla.util.http.HttpSchemes.SCHEME_HTTP;
@@ -72,7 +73,9 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
             }
         }
 
+        artifacts.sort(comparing(Artifact::getName));
         FileUtil.toFile(outFile, json(artifacts));
+        out("Wrote "+artifacts.size()+" artifacts to "+abs(outFile));
     }
 
     private List<Artifact> processPom(File pom) {
