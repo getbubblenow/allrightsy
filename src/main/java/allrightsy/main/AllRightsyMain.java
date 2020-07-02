@@ -13,11 +13,8 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import static java.util.Comparator.comparing;
 import static org.cobbzilla.util.daemon.ZillaRuntime.empty;
 import static org.cobbzilla.util.daemon.ZillaRuntime.shortError;
 import static org.cobbzilla.util.http.HttpSchemes.SCHEME_HTTP;
@@ -40,7 +37,7 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
             return;
         }
 
-        final List<Artifact> artifacts = new ArrayList<>();
+        final Set<Artifact> artifacts = new TreeSet<>();
         for (File f : opts.getPackageFiles()) {
             if (f.getName().equals("pom.xml")) {
                 artifacts.addAll(processPom(f));
@@ -73,7 +70,6 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
             }
         }
 
-        artifacts.sort(comparing(Artifact::getName));
         FileUtil.toFile(outFile, json(artifacts));
         out("Wrote "+artifacts.size()+" artifacts to "+abs(outFile));
     }
