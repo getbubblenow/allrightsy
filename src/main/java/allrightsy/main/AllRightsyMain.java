@@ -231,7 +231,7 @@ public class AllRightsyMain extends BaseMain<AllRightsyOptions> {
 
     private String url2stringFollowRedirects(String url) {
         try {
-            return execScript("curl --insecure --silent '" + url + "' 2> /dev/null");
+            return execScript("curl --insecure --location --silent '" + url + "' 2> /dev/null");
         } catch (Exception e) {
             return null;
         }
