@@ -30,7 +30,7 @@ public class Artifact implements Comparable<Artifact> {
     }
 
     @Override public int compareTo(Artifact o) {
-        int diff = getName().compareTo(o.getName());
+        int diff = getName().toLowerCase().compareTo(o.getName().toLowerCase());
         if (diff != 0) return diff;
         return getType() == null ? o.getType() == null ? 0 : Integer.MAX_VALUE : getType().compareTo(o.getType());
     }
